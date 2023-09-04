@@ -44,7 +44,7 @@ function Login() {
         })
         .then(res => {
             if (res.ok) {
-                res.json().then(res => console.log(res))
+                res.json().then(user => setUser(user))
             } else {
                 res.json().then(res => console.log(res))
             }
