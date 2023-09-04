@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
+    rescue_from ActiveRecord::RecordInvalid, with: :invalid_entity
 
     def show
         user = User.find(session[:user_id])

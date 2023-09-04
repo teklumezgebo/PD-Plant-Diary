@@ -2,7 +2,7 @@
   "name": "react-rails-api-project-template-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:3000/",
   "engines": {
     "node": "16.x"
   },
@@ -12,7 +12,9 @@
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "^5.0.1",
+    "tailwindcss": "^3.3.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
