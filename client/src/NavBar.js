@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
-function Navbar() {
+function Navbar({ onUserChange }) {
     return (
         <nav className="">
             <Link to="/">Home</Link>

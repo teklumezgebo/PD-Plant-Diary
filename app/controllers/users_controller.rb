@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     def show
         user = User.find(session[:user_id])
-        user ? render json: user, status: :ok : render json: { error: "Not Authorized" }, status: :unauthorized
+        user ? (render json: user, status: :ok) : (render json: { error: "Not Authorized" }, status: :unauthorized)
     end
     
     def create

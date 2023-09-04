@@ -10,7 +10,8 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar onUserChange={setUser} />
+      <h1 className="text-center">homepage</h1>
     </div>
   )
 }
