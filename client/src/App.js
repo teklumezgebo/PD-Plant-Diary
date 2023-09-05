@@ -5,6 +5,8 @@ import Navbar from "./NavBar";
 import Login from "./Login"
 import Profile from "./Profile";
 import Homepage from "./HomePage";
+import Dashboard from "./Dashboard";
+import PlantPage from "./PlantPage";
 
 function App() {
   const { user } = useUserContext()
@@ -16,8 +18,10 @@ function App() {
         <Navbar />
       <div className="flex-1 flex items-center justify-center">
         <Routes>
-          <Route path="/profile" element={<Profile />} />
-          <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/plants" element={<PlantPage />} />
+        <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </div>

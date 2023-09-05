@@ -5,8 +5,8 @@ function Profile() {
     const { user } = useUserContext()
     
     return (
-        <div>
-            <h1 className="text-center">{user.username}</h1>
+        <div className="inline-flex justify-start">
+            <span className="align-top">{user.username}</span>
         </div>
     )
 }
