@@ -8,16 +8,18 @@ import Homepage from "./HomePage";
 
 function App() {
   const { user } = useUserContext()
-  
+
   if (!user) return <Login />
 
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/profile" element={<Profile />} />
-        <Route exact path="/" element={<Homepage />} />
-      </Routes>
+    <div className="flex">
+        <Navbar />
+      <div className="flex-1 flex items-center justify-center">
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route exact path="/" element={<Homepage />} />
+        </Routes>
+      </div>
     </div>
   )
 }
