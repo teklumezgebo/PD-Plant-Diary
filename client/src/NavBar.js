@@ -21,7 +21,7 @@ function Navbar() {
     
     return (
         <div className="flex">
-            <div className={`bg-[#A5A58D] h-screen p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}>
+            <div className={`bg-[#A5A58D] h-full p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative left-0`}>
                 <BsArrowLeftShort className={`bg-[#6B705C] text-black text-3xl rounded-full absolute -right-3 top-9 border border-black cursor-pointer ${!open && "rotate-180"}`}  onClick={() => setOpen(!open)}/>
                 <div className="inline-flex">
                     <Link to="/"><GiPlantSeed className={`text-4xl text-black rounded hover:text-[#FFE8D6] cursor-pointer block float-left mr-2 duration-200 ${!open && "rotate-[360deg]"}`}/></Link>
