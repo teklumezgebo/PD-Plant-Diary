@@ -24,8 +24,6 @@ function App() {
 
   if (!user) return <Login />
 
-  console.log(user)
-
   return (
     <div className="flex">
         <Navbar />
