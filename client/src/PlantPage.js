@@ -20,7 +20,12 @@ function PlantPage() {
         })
         .then(res => {
             if (res.ok) {
-                res.json().then(res => console.log(res))
+                res.json().then(plant => {
+                    console.log(plant)
+                    setName('')
+                    setSpecies('')
+                    setNotes('')
+                })
             } else {
                 res.json().then(res => console.log(res))
             }
