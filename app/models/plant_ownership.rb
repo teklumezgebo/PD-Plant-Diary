@@ -1,0 +1,2 @@
+class PlantOwnership < ApplicationRecord
+end

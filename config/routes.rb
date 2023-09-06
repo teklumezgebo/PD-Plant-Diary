@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :plant_ownerships
   resources :plants
   resources :users, only: [:show, :create]
   get '/auth', to: "users#show"
