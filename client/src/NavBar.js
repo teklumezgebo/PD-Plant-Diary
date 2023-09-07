@@ -25,7 +25,7 @@ function Navbar() {
                 <BsArrowLeftShort className={`bg-[#6B705C] text-black text-3xl rounded-full absolute -right-3 top-9 border border-black cursor-pointer ${!open && "rotate-180"}`}  onClick={() => setOpen(!open)}/>
                 <div className="inline-flex">
                     <Link to="/"><GiPlantSeed className={`text-4xl text-black rounded hover:text-[#FFE8D6] cursor-pointer block float-left mr-2 duration-200 ${!open && "rotate-[360deg]"}`}/></Link>
-                    <h1 className={`text-black origin-left font-medium text-2xl flex-1 duration-0 ${!open && "hidden"}`}>PD</h1>
+                    <h1 className={`text-black origin-left font-bold text-2xl flex-1 duration-0 ${!open && "hidden"} `}>PD</h1>
                 </div>
                 <ul className="pt-2">
                     <Link to="/dashboard"><li className="text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><MdSpaceDashboard/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Dashboard</span></li></Link>
