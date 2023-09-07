@@ -59,6 +59,7 @@ function PlantPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify">
                     {user.plants.map(plant => { return (<PlantCard
                         key={plant.id}
+                        id={plant.id}
                         name={plant.name}
                         species={plant.species}
                         notes={plant.notes}

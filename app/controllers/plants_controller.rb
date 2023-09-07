@@ -20,11 +20,17 @@ class PlantsController < ApplicationController
     end
 
     def update
-
+        user = User.find(session[:user_id])
+        plant = user.plants.find(params[:plantId])
+        plant.update(plant_params)
+        render json: plant, status: :ok
     end
 
     def destroy
-
+        user = User.find(session[:user_id])
+        plant = user.plants.find(params[:plantId])
+        plant.destroy
+        head :no_content
     end
 
     private

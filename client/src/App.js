@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import Homepage from "./HomePage";
 import Dashboard from "./Dashboard";
 import PlantPage from "./PlantPage";
+import PlantEntry from "./Entry";
 
 function App() {
   const { user, setUser } = useUserContext()
@@ -32,6 +33,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/plants" element={<PlantPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route exact path="/entry/:id" element={<PlantEntry />} />
         </Routes>
     </div>
   )
