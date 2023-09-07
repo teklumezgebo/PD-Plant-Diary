@@ -8,9 +8,20 @@ function Entry() {
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
     
-    return(<div className="flex justify-center bg-[#64705C] w-full h-screen p-10 m-9 rounded-lg">
-        <h1>{plant.name}</h1>
-    </div>)
+    return(
+        <div className="grid-rows-1 place-content-center w-full">
+            <div className="flex bg-[#64705C] h-screen p-10 m-9 rounded-lg">
+                <div className="pb-10 rounded-lg h-40 w-50">
+                    <h1 className="p-5 rounded-lg font-extrabold text-[#C3B4C4] text-7xl text-left" >{plant.name}</h1>
+                    <h1 className="pl-5 rounded-lg font-extrabold text-[#CC9E80] text-2xl text-left" >{plant.species}</h1>
+                    <h1 className="p-5 mt-10 font-semibold text-xl text-[#ffea00]"><em>Notes</em>:</h1>
+                    <div className="bg-[#ede4d4] flex rounded-lg ml-3 p-5 w-96 place-content-center ">
+                        <h1 className="text-sm text-black text-center">{plant.notes}</h1>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    )
 }
 
 export default Entry
