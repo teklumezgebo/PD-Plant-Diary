@@ -11,6 +11,11 @@ class PlantsController < ApplicationController
 
     def create
         plant = Plant.create!(plant_params)
+        ownership = PlantOwnership.create!(
+            user_id: session[:user_id],
+            plant_id: plant.id,
+            plant_date: params[:plantDate]
+        )
         render json: plant, status: :created
     end
 
