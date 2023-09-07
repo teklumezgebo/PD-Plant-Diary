@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useUserContext } from "./UserContext";
+import { useUserContext } from "../UserContext";
 import { BsArrowLeftShort } from "react-icons/bs"
 import { MdSpaceDashboard } from "react-icons/md"
 import { GiPlantSeed } from "react-icons/gi"

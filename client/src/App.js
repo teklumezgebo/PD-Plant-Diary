@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useUserContext } from "./UserContext";
-import Navbar from "./NavBar";
-import Login from "./Login"
-import Profile from "./Profile";
-import Homepage from "./HomePage";
-import Dashboard from "./Dashboard";
-import PlantPage from "./PlantPage";
-import PlantEntry from "./Entry";
+import Navbar from "./components/NavBar";
+import Login from "./components/Login"
+import Profile from "./components/Profile";
+import Homepage from "./components/HomePage";
+import Dashboard from "./components/Dashboard";
+import PlantPage from "./components/PlantPage";
+import PlantEntry from "./components/Entry";
 
 function App() {
   const { user, setUser } = useUserContext()

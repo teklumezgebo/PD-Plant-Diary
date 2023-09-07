@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useUserContext } from "./UserContext";
+import { useUserContext } from "../UserContext";
 import PlantCard from "./PlantCard";
 
 function PlantPage() {
