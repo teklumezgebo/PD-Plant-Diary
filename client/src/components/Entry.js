@@ -11,7 +11,6 @@ function Entry() {
     const plant = user.plants.find(plant => plant.id === parseInt(id))
 
     console.log(plant)
-    console.log(user)
 
     const chartdata = {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -27,7 +26,7 @@ function Entry() {
                 <div className="pb-10 rounded-lg h-40 ">
                     <h1 className="p-5 rounded-lg font-extrabold text-[#CC9E80] text-7xl text-left" >{plant.name}</h1>
                     <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >{plant.species}</h1>
-                    <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >{plant.plant_date}</h1>
+                    <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >Entered: {plant.plant_ownerships[0].plant_date}</h1>
                     <h1 className="p-5 mt-10 font-semibold text-xl text-[#ffea00]"><em>Notes</em>:</h1>
                     <div className="bg-[#ede4d4] flex rounded-lg ml-3 p-5 w-96 place-content-center ">
                         <h1 className="text-sm text-black text-center">{plant.notes}</h1>
@@ -35,13 +34,19 @@ function Entry() {
                 </div>
                 <div className="grid-col-1 w-full h-full ml-20 bg-[#FFE8D6] rounded-lg p-5">
                     <div className="bg-[#D6E0FF] p-5 h-80 text-black text-left text-3xl font-extrabold rounded-lg w-full">
-                        <h1>Care Requirements</h1>
-                        <h1>Light intensity, light duration (lumens/lux)</h1>
-                        <h1>Watering Frequency</h1>
-                        <h1>Nutrients - what kinds, how much of each, when/how long</h1>
+                        <h1 className="text-5xl">Care Requirements</h1>
+                        <h1 className="mt-5">Light Duration: placeholder</h1>
+                        <h1 className="mt-3">Light intensity: placeholder</h1>
+                        <h1 className="mt-3">Watering Frequency: placeholder</h1>
+                        <h1 className="mt-3">Nutrients: placeholder</h1>
                     </div>
                     <div className="flex bg-[#D6E0FF] h-96 p-5 mt-10 rounded-lg w-full justify-center">
-                        <Line data={chartdata} />   
+                        <div className="bg-[#FFF5D6] mr-32 w-64 rounded-lg">
+                            <input className="bg-white m-10 " type="text"/>
+                            <input className="bg-white m-10 mt-5" type="text" />
+                            <input className="bg-white mt-24 ml-4 rounded-md p-3 hover:scale-105 duration-200 cursor-pointer" type="submit" />
+                        </div>
+                        <Line className="p-4" data={chartdata} />   
                     </div> 
                 </div> 
             </div>           
