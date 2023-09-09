@@ -10,6 +10,9 @@ function Entry() {
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
 
+    console.log(plant)
+    console.log(user)
+
     const chartdata = {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         datasets: [{
@@ -24,6 +27,7 @@ function Entry() {
                 <div className="pb-10 rounded-lg h-40 ">
                     <h1 className="p-5 rounded-lg font-extrabold text-[#CC9E80] text-7xl text-left" >{plant.name}</h1>
                     <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >{plant.species}</h1>
+                    <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >{plant.plant_date}</h1>
                     <h1 className="p-5 mt-10 font-semibold text-xl text-[#ffea00]"><em>Notes</em>:</h1>
                     <div className="bg-[#ede4d4] flex rounded-lg ml-3 p-5 w-96 place-content-center ">
                         <h1 className="text-sm text-black text-center">{plant.notes}</h1>

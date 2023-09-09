@@ -14,7 +14,7 @@ class PlantsController < ApplicationController
         ownership = PlantOwnership.create!(
             user_id: session[:user_id],
             plant_id: plant.id,
-            plant_date: params[:plantDate]
+            plant_date: params[:plant_date]
         )
         render json: plant, status: :created
     end

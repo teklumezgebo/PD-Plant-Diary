@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :care_requirements
   resources :plant_ownerships
   resources :plants
   resources :users, only: [:show, :create]

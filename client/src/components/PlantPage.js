@@ -13,7 +13,7 @@ function PlantPage() {
     const newPlantObj = {
         name: name,
         species: species,
-        plantDate: plantDate,
+        plant_date: plantDate,
         notes: notes
     }
 
