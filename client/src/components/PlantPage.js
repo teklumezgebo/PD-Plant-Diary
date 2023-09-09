@@ -51,7 +51,7 @@ function PlantPage() {
                     <input className="rounded border border-white hover:border-black duration-150 text-sm mb-4 indent-1 w-36 h-9" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name..."/>
                     <input className="rounded border border-white hover:border-black duration-150 text-sm mb-4 indent-1 w-44 h-9" type="text" value={species} onChange={e => setSpecies(e.target.value)} placeholder="Species..."/>
                     <input className="rounded border border-white hover:border-black duration-150 text-sm mb-4 indent-1 w-44 h-9" type="text" value={plantDate} onChange={e => setPlantDate(e.target.value)} placeholder="Day potted/planted..."/>
-                    <textarea className="rounded resize-y border border-white hover:border-black duration-150 text-sm p-5 indent-1 w-50" value={notes} onChange={e => setNotes(e.target.value)} placeholder="Notes..." />
+                    <textarea className="rounded resize-y border border-white hover:border-black duration-150 text-sm  p-2 w-50" value={notes} onChange={e => setNotes(e.target.value)} placeholder="Notes..." />
                     <input className="rounded border border-[#6B705C] bg-[#6B705C] text-black hover:text-white duration-200 font-semibold mt-4 w-24 text-center cursor-pointer" type="submit" value="Add Plant"/>
                 </form>
             </div>
