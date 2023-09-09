@@ -30,7 +30,12 @@ function Entry() {
                     </div>
                 </div>
                 <div className="grid-col-1 w-full h-full ml-20 bg-[#FFE8D6] rounded-lg p-5">
-                    <h1 className="bg-[#D6E0FF] p-5 h-80 text-black text-left text-3xl font-extrabold rounded-lg w-full">Care Requirements</h1>
+                    <div className="bg-[#D6E0FF] p-5 h-80 text-black text-left text-3xl font-extrabold rounded-lg w-full">
+                        <h1>Care Requirements</h1>
+                        <h1>Light intensity, light duration (lumens/lux)</h1>
+                        <h1>Watering Frequency</h1>
+                        <h1>Nutrients - what kinds, how much of each, when/how long</h1>
+                    </div>
                     <div className="flex bg-[#D6E0FF] h-96 p-5 mt-10 rounded-lg w-full justify-center">
                         <Line data={chartdata} />   
                     </div> 
