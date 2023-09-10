@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../UserContext";
 import { Line } from "react-chartjs-2";
@@ -7,6 +7,11 @@ import { Chart as Chart } from "chart.js/auto"
 function Entry() {
     const { id } = useParams()
     const { user } = useUserContext()
+
+    const [duration, setDuration] = useState()
+    const [intensity, setIntensity] = useState()
+    const [frequency, setFrequency] = useState()
+    const [nutrients, setNutrients] = useState()
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
 
@@ -42,11 +47,13 @@ function Entry() {
                     </div>
                     <div className="flex bg-[#D6E0FF] h-96 p-5 mt-10 rounded-lg w-full justify-center">
                         <div className="bg-[#FFF5D6] mr-32 w-64 rounded-lg">
-                            <input className="bg-white m-10 " type="text"/>
-                            <input className="bg-white m-10 mt-5" type="text" />
-                            <input className="bg-white mt-24 ml-4 rounded-md p-3 hover:scale-105 duration-200 cursor-pointer" type="submit" />
+                            <form>
+                                <input className="bg-white m-10 " type="text"/>
+                                <input className="bg-white m-10 mt-5" type="text" />
+                                <input className="bg-white mt-24 ml-4 rounded-md p-3 hover:scale-105 duration-200 cursor-pointer" type="submit" value="Record" />
+                            </form>
                         </div>
-                        <Line className="p-4" data={chartdata} />   
+                        <Line className="bg-[#FFF5D6] rounded-lg p-4" data={chartdata} />   
                     </div> 
                 </div> 
             </div>           
