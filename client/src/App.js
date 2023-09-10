@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useUserContext } from "./UserContext";
 import Navbar from "./components/NavBar";
-import Login from "./components/Login"
+import LandingPage from "./components/LandingPage"
 import Profile from "./components/Profile";
 import Homepage from "./components/HomePage";
 import Dashboard from "./components/Dashboard";
@@ -23,7 +23,7 @@ function App() {
     })
   }, [setUser])
 
-  if (!user) return <Login />
+  if (!user) return <LandingPage />
 
   return (
     <div className="flex">
