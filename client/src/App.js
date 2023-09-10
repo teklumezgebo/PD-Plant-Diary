@@ -29,11 +29,11 @@ function App() {
     <div className="flex">
         <Navbar />
         <Routes>
-        <Route exact path="/" element={<Homepage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/plants" element={<PlantPage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route exact path="/entry/:id" element={<PlantEntry />} />
+          <Route exact path="/" element={<Homepage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/plants" element={<PlantPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route exact path="/entry/:id" element={<PlantEntry />} />
         </Routes>
     </div>
   )
