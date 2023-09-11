@@ -21,17 +21,17 @@ function Navbar() {
     
     return (
         <div className="flex">
-            <div className={`bg-[#A5A58D] h-full p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative left-0`}>
-                <BsArrowLeftShort className={`bg-[#6B705C] text-black text-3xl rounded-full absolute -right-3 top-9 border border-black cursor-pointer ${!open && "rotate-180"}`}  onClick={() => setOpen(!open)}/>
+            <div className={`bg-[#B7B7A4] h-full p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative left-0`}>
+                <BsArrowLeftShort className={`bg-[#B7B7A4] text-black text-3xl rounded-full absolute -right-3 top-9 border border-black cursor-pointer ${!open && "rotate-180"}`}  onClick={() => setOpen(!open)}/>
                 <div className="inline-flex">
-                    <Link to="/"><GiPlantSeed className={`text-4xl text-black rounded hover:text-[#FFE8D6] cursor-pointer block float-left mr-2 duration-200 ${!open && "rotate-[360deg]"}`}/></Link>
-                    <h1 className={`text-black origin-left font-bold text-2xl flex-1 duration-0 ${!open && "hidden"} `}>PD</h1>
+                    <Link to="/"><GiPlantSeed className={`text-4xl text-white rounded hover:text-[#FFE8D6] cursor-pointer block float-left mr-2 duration-200 ${!open && "rotate-[360deg]"}`}/></Link>
+                    <h1 className={`text-white origin-left font-bold text-2xl flex-1 duration-0 ${!open && "hidden"} `}>PD</h1>
                 </div>
                 <ul className="pt-2">
-                    <Link to="/dashboard"><li className="text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><MdSpaceDashboard/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Dashboard</span></li></Link>
-                    <Link to="/plants"><li className="text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><RiPlantFill/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Plants</span></li></Link>
-                    <Link to="/profile"><li className="text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><FaUser/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Profile</span></li></Link>
-                    <li className="text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#CB997E] rounded-md mt-2" onClick={handleLogout}><span className="text-2xl block float-left"><CgLogOut/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Logout</span></li>
+                    <Link to="/dashboard"><li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><MdSpaceDashboard/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Dashboard</span></li></Link>
+                    <Link to="/plants"><li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><RiPlantFill/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Plants</span></li></Link>
+                    <Link to="/profile"><li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#FFE8D6] rounded-md mt-2"><span className="text-2xl block float-left"><FaUser/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Profile</span></li></Link>
+                    <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#CB997E] rounded-md mt-2" onClick={handleLogout}><span className="text-2xl block float-left"><CgLogOut/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Logout</span></li>
                 </ul>
             </div>
         </div>

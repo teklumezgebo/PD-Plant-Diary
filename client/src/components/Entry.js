@@ -19,6 +19,8 @@ function Entry() {
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
 
+    console.log(plant)
+
     const chartdata = {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         datasets: [{
@@ -40,39 +42,46 @@ function Entry() {
     }
     
     return(
-        <div className="grid-rows-1 place-content-center w-full">
-            <div className="flex bg-[#64705C] h-screen p-10 m-9 rounded-lg">
-                <div className="pb-10 rounded-lg h-40 ">
-                    <h1 className="p-5 rounded-lg font-extrabold text-[#CC9E80] text-7xl text-left" >{plant.name}</h1>
-                    <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >{plant.species}</h1>
-                    <h1 className="pl-5 rounded-lg font-extrabold text-[#C3B4C4] text-2xl text-left" >Entered: {plant.plant_ownerships[0].plant_date}</h1>
-                    <h1 className="p-5 mt-10 font-semibold text-xl text-[#ffea00]"><em>Notes</em>:</h1>
-                    <div className="bg-[#ede4d4] outline outline-black outline-4 flex rounded-lg ml-3 p-5 w-96 place-content-center ">
-                        <h1 className="text-sm text-black text-center">{plant.notes}</h1>
-                    </div>
-                </div>
-                <div className="grid-col-1 w-full h-full ml-20 bg-[#FFE8D6] outline outline-black outline-4 rounded-lg p-5">
-                    <div className="bg-[#D6E0FF] p-5 mt-5 h-80 text-black text-left text-3xl font-extrabold rounded-lg w-full">
-                        <h1 className="text-5xl">Care Requirements</h1>
-                        <h1 className="mt-5">Light Duration: placeholder</h1>
-                        <h1 className="mt-3">Light intensity: placeholder</h1>
-                        <h1 className="mt-3">Watering Frequency: placeholder</h1>
-                        <h1 className="mt-3">Nutrients: placeholder</h1>
-                    </div>
-                    <div className="bg-[#D6E0FF] h-96 p-5 mt-14 rounded-lg w-full">
-                        <div className="bg-[#FFF5D6] ml-4 w-64 rounded-lg">
-                            <form className="h-84 mt-1">
-                                <h1 className="ml-4 -mb-4">Value</h1>
-                                <input className="bg-white m-4 rounded-md p-2 mt-6" type="text" value={measurementValue} onChange={e => setMeasurementValue(e.target.value)}/>
-                                <h1 className="ml-4 mb-2">Date</h1>
-                                <DatePicker className="bg-white ml-4 rounded-md p-2" selected={selectedDate} onChange={(date) => setSelectedDate(date)}/>
-                                <input className="bg-white mt-24 ml-4 mb-3 rounded-md p-3 hover:scale-105 duration-200 cursor-pointer" type="submit" value="Record" />
+        <div className="bg-[#64705C] grid grid-cols-1 w-screen h-full p-5">
+            <div className="bg-[#FFE8D6] grid grid-flow-cols-2 justify-stretch gap-2 h-screen rounded-xl p-4 shadow-xl">
+                <div className="bg-[#DDBEA9] grid grid-cols-2 gap-4 w-full rounded-xl items-start p-4 shadow-md">
+                    <div className="bg-[#615C70] flex flex-col-2 gap-3 h-full items-start rounded-xl p-4">
+                        <div className="bg-[#F4F3F5] flex flex-col gap-2 rounded-md p-2 w-96">
+                            <div className="text-black p-2 font-semibold text-center text-7xl">
+                                {plant.name}
+                            </div>
+                            <div className=" text-black text-left">
+                                {plant.species}
+                            </div>
+                            <div className="  text-black text-left">
+                                {plant.plant_ownerships[0].plant_date}
+                            </div>
+                            <div className=" text-black text-left">
+                                Notes:
+                            </div>
+                            <div className=" text-black text-left">
+                                {plant.notes}
+                            </div>
+                        </div>
+                        <div className="bg-[#F4F3F5] flex flex-col w-full h-full rounded-md p-3">
+                            <form className="bg-[#3E3B48] rounded-md flex flex-col gap-2 p-3 items-center">
+                                <div className="bg-white text-center rounded-xl p-2">Edit Trackers</div>
+                                <input className="bg-black p-3" type="text"/>
+                                <input className="bg-black" type="text"/>
+                                <input className="bg-black" type="text"/>
+                                <input className="bg-black" type="text"/>
                             </form>
                         </div>
-                        <Line className="bg-[#FFF5D6] rounded-lg p-5 ml-96 -mt-80" data={chartdata} />   
-                    </div> 
-                </div> 
-            </div>           
+                    </div>
+                    <div className="bg-[#705C61] grid grid-cols-1 place-items-center h-full items-center rounded-xl p-4">
+                        <div className="bg-white w-32 p-2 text-center rounded-xl hover:cursor-pointer hover:scale-110 duration-150">Upload Image</div>
+                    </div>
+                </div>
+                <div className="bg-[#DDBEA9] grid grid-cols-2 gap-3 p-4 w-full rounded-xl shadow-md">
+                    <div className="bg-[#5C706B] rounded-xl text-center"><Line data={chartdata} /></div>
+                    <div className="bg-[#5C706B] rounded-xl text-center"><Line data={chartdata} /></div>
+                </div>
+            </div> 
         </div>
     )
 }

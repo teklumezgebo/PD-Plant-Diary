@@ -26,7 +26,7 @@ function App() {
   if (!user) return <LandingPage />
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
