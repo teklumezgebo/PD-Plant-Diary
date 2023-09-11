@@ -6,7 +6,6 @@ function LandingPage() {
     const [loginPassword, setLoginPassword] = useState('')
     const [signUpUsername, setSignUpUsername] = useState('')
     const [signUpPassword, setSignUpPassword] = useState('')
-    const [form, setForm] = useState(false)
     const [loginForm, setLoginForm] = useState(false)
     const [signUpForm, setSignupForm] = useState(false)
 
