@@ -16,20 +16,19 @@ function Entry() {
     const [duration, setDuration] = useState('')
     const [intensity, setIntensity] = useState('')
     const [frequency, setFrequency] = useState('')
-    const [nutrients, setNutrients] = useState('')
+    const [location, setLocation] = useState('')
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [measurementValue, setMeasurementValue] = useState('')
     const [image, setImage] = useState('')
     const [form, setForm] = useState(false)
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
-    console.log(plant)
 
     const chartdata = {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        labels: plant.care_requirements.measurement_date.map(date => date.substr(0,10)),
         datasets: [{
             label: "amount",
-            // data: plant.care_requirements.measurement_value.map(value => parseInt(value)),
+            data: plant.care_requirements.measurement_value.map(value => parseInt(value)),
             backgroundColor: '#9BD0F5'
         }]
     }
@@ -38,12 +37,12 @@ function Entry() {
         watering_frequency: frequency,
         light_duration: duration,
         light_intensity: intensity,
-        nutrients: nutrients
+        location: location
     }
 
     const newDataObj = {
-        measurementDate: selectedDate,
-        measurementValue: measurementValue
+        measurement_date: selectedDate,
+        measurement_value: measurementValue
     }
 
     function handleNewData(e) {
@@ -55,7 +54,14 @@ function Entry() {
         })
         .then(res => {
             if (res.ok) {
-                res.json().then(res => console.log(res))
+                res.json().then(updatedPlant => {
+                    const updatedDates = updatedPlant.care_requirements.measurement_date
+                    const updatedValues = updatedPlant.care_requirements.measurement_value
+                    plant.care_requirements.measurement_date = updatedDates
+                    plant.care_requirements.measurement_value = updatedValues
+                    setMeasurementValue('')
+                    setSelectedDate('')
+                })
             } else {
                 res.json().then(res => console.log(res))
             }
