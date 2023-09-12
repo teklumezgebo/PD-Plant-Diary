@@ -25,6 +25,7 @@ class CareRequirementsController < ApplicationController
         if !plant.care_requirements[0]
             care_requirement = CareRequirement.create(
                 plant_id: plant.id,
+                location: params[:location],
                 watering_frequency: params[:watering_frequency],
                 light_intensity: params[:light_intensity],
                 light_duration: params[:light_duration]
@@ -32,9 +33,10 @@ class CareRequirementsController < ApplicationController
             render json: plant, status: :created
         else
             plant.care_requirements[0].update(
-                watering_frequency: params[:watering_frequency],
-                light_intensity: params[:light_intensity],
-                light_duration: params[:light_duration]
+                location: params[:location] == '' ? plant.care_requirements[0].location : params[:location],
+                watering_frequency: params[:watering_frequency] == '' ? plant.care_requirements[0].watering_frequency : params[:watering_frequency],
+                light_intensity: params[:light_intensity] == '' ? plant.care_requirements[0].light_intensity : params[:light_intensity],
+                light_duration: params[:light_duration] == '' ? plant.care_requirements[0].light_duration : params[:light_duration]
             )
             render json: plant, status: :created
         end
