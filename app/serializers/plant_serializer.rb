@@ -9,6 +9,6 @@ class PlantSerializer < ActiveModel::Serializer
   end
 
   def care_requirements
-    object.care_requirements
+    object.care_requirements.first
   end
 end

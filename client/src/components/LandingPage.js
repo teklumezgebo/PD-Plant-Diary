@@ -78,7 +78,7 @@ function LandingPage() {
     return (
         <div className="flex flex-col bg-[#64705C] h-screen justify-top items-center">
                 <div className="text-black text-center font-semibold text-9xl mt-5 bg-[#FFF5D6] w-auto rounded-xl p-3 shadow-xl">PD</div>
-                <div className="text-black text-center font-thin text-3xl bg-[#FFF5D6] w-auto rounded-lg p-3 mt-10 shadow-xl">The all in one plant tracking app.</div>
+                <div className="text-black text-center font-thin text-3xl bg-[#FFF5D6] w-auto rounded-lg p-3 mt-10 shadow-xl">The all in one plant tracker.</div>
                 <div className="flex flex-row mt-8 gap-5">
                     <div className={`text-black text-center font-semibold ${loginForm ? 'bg-[#6F6F57] scale-90' : 'bg-[#B7B7A4] hover:scale-105'} w-20 p-2 rounded-lg shadow-md  hover:cursor-pointer duration-300`} onClick={handleLoginForm}>Login</div>
                     <div className={`text-black text-center font-semibold ${signUpForm ? 'bg-[#BD8058] scale-90' : 'bg-[#DDBEA9] hover:scale-105'}  w-20 p-2 rounded-lg shadow-md  hover:cursor-pointer duration-300`} onClick={handleSignUpForm}>Sign Up</div>
