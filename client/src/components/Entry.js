@@ -20,7 +20,10 @@ function Entry() {
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [measurementValue, setMeasurementValue] = useState('')
     const [image, setImage] = useState('')
+    const [tracking, setTracking] = useState(false)
     const [form, setForm] = useState(false)
+
+   
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
 
@@ -28,12 +31,15 @@ function Entry() {
 
     // const data = plant.care_requirements.measurement_value
 
+    Chart.defaults.color = "#F2E9E4"
+
     const chartdata = {
-        // labels: dates ? plant.care_requirements.measurement_date.map(date => date.substr(0,10)) : [],
+        // labels: plant.care_requirements.measurement_date.map(date => date.substr(0,10)),
         datasets: [{
             label: "amount",
-            // data: data ? plant.care_requirements.measurement_value.map(value => parseInt(value)) : [],
-            backgroundColor: '#9BD0F5'
+            // data: plant.care_requirements.measurement_value.map(value => parseInt(value)),
+            backgroundColor: '#22223B',
+            borderColor: 'white'
         }]
     }
 
@@ -98,34 +104,28 @@ function Entry() {
     
     return(
         <div className="grid grid-cols-1 w-screen h-full p-5">
-            <div className="bg-[#F2E9E4] grid grid-flow-cols-2 justify-stretch gap-2 h-full rounded-xl p-4 shadow-xl">
+            <div className="bg-[#F2E9E4] grid grid-flow-rows gap-2 h-full rounded-xl p-4 shadow-xl">
                 <div className="bg-[#4A4E69] grid grid-cols-2 gap-4 w-full rounded-xl h-full items-start p-4 shadow-md">
-                    <div className="bg-[#9A8C98] flex flex-col-2 gap-3 h-full items-start rounded-xl shadow-lg p-4">
-                        <div className="bg-[#F2E9E4] flex flex-col gap-2 rounded-md shadow-lg p-2 w-96">
-                            <div className="text-black p-2 font-semibold text-center text-7xl">
-                                {plant.name}
-                            </div>
-                            <div className=" text-black text-left">
-                                Species: {plant.species}
-                            </div>
-                            <div className="  text-black text-left">
-                                Entered: {plant.plant_ownerships[0].plant_date}
-                            </div>
+                    <div className="bg-[#9A8C98] grid grid-col-2 gap-3 h-full items-start rounded-xl shadow-lg p-4">
+                        <div className="bg-[#4A4E69] grid grid-col gap-2 rounded-md shadow-lg p-2 w-96">
+                            <div className="text-[#F2E9E4] p-2 font-semibold text-center text-7xl">{plant.name}</div>
+                            <div className=" text-[#F2E9E4] text-left font-medium">Species: {plant.species}</div>
+                            <div className="text-[#F2E9E4] text-left font-medium">Entered: {plant.plant_ownerships[0].plant_date}</div>
                         </div>
-                        <div className="bg-[#4A4E69] shadow-lg flex w-full h-full gap-3 rounded-md p-3">
+                        <div className="bg-[#4A4E69] shadow-lg grid grid-col-1 w-full h-full gap-4 rounded-md p-3 items-center">
                             <div className="bg-[#F2E9E4] w-full h-full rounded-md" >
                                 <div className="bg-[#F2E9E4] text-[#22223B] p-3 rounded-md font-semibold text-left text-sm ">
                                     <div className="text-xl ">Notes:</div>
                                     <div className="h-full">{plant.notes}</div>
                                 </div>
                             </div>
-                            <form className="bg-[#F2E9E4] shadow-lg rounded-md w-full grid grid-col gap-2 p-3 items-left" onSubmit={handleNewRequirement}>
-                                <div className="bg-[#9A8C98] shadow-md text-center rounded-xl w-full p-2 hover:cursor-pointer hover:scale-105 duration-150 font-semibold" onClick={() => setForm(!form)}>Edit Trackers</div>
+                            <form className="bg-[#F2E9E4] shadow-lg rounded-md w-full h-full grid grid-col gap-2 p-3 items-left" onSubmit={handleNewRequirement}>
+                                <div className="bg-[#9A8C98] shadow-md text-center rounded-xl w-1/3 p-2 hover:cursor-pointer hover:scale-105 duration-150 font-semibold" onClick={() => setForm(!form)}>Edit Trackers</div>
                                 <div className="text-left text-[#22223B] font-bold">Watering Frequnecy: {plant.care_requirements ? (plant.care_requirements.watering_frequency ? plant.care_requirements.watering_frequency : "...") : "..."}</div>
                                 <div className="text-left text-[#22223B] font-bold">Light Intensity: {plant.care_requirements ? (plant.care_requirements.light_intensity ? plant.care_requirements.light_intensity : "..." ): "..."}</div> 
                                 <div className="text-left text-[#22223B] font-bold">Light Duration: {plant.care_requirements ? (plant.care_requirements.light_duration ? plant.care_requirements.light_duration :  "..." ): "..."}</div>
                                 <div className="text-left text-[#22223B] font-bold">Location: {plant.care_requirements ? (plant.care_requirements.location ? plant.care_requirements.location : "...") : "..."}</div>
-                                <div className={`bg-white h-full shadow-lg rounded-md outline flex items-center justify-start ${form ? 'scale-100' : 'scale-0'} duration-150 p-2`}>
+                                <div className={`bg-white h-full w-3/5 shadow-lg rounded-md outline grid items-center justify-center ${form ? 'scale-100' : 'scale-0'} duration-150 p-2`}>
                                     <div className="bg-[#4A4E69] shadow-lg grid grid-col items-center rounded-lg h-full p-2">
                                         <div className="grid grid-col gap-2 p-4">
                                             <div className="grid grid-col gap-2 items-center" >
@@ -153,20 +153,18 @@ function Entry() {
                         </div>
                     </div>
                 </div>
-                <div className="bg-[#4A4E69] grid grid-cols-2 gap-3 p-4 w-full rounded-xl shadow-md items-center">
-                    <div className="bg-[#5C706B] rounded-xl h-full text-center">
-                        <div className="bg-white rounded-xl shadow-lg">
-                            <Line data={chartdata} />
-                        </div>
-                    </div>
-                    <div className="bg-[#F2E9E4] grid grid-cols-1 rounded-xl h-full text-center shadow-lg  p-4">
+                <div className={`bg-[#4A4E69] grid ${tracking ? 'grid-cols-2' : 'grid-cols-1 place-items-center'} gap-3 p-4 w-full rounded-xl shadow-md items-center `}>
+                  {tracking ? <div className="bg-[#5C706B] rounded-xl h-full text-center p-2"> 
+                        <Line className="text-[#F2E9E4]" data={chartdata} />
+                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={() => setTracking(!tracking)}>Add Tracking</div>}
+                    {tracking ? <div className="bg-[#F2E9E4] grid grid-cols-1 rounded-xl h-full text-center shadow-lg  p-4">
                         <form className="bg-[#9A8C98] shawdow-lg rounded-2xl p-4 grid grid-cols-2 items-start gap-3" onSubmit={handleNewData}>
                             <input className="rounded-md h-20 text-center text-5xl font-bold shadow-lg my-3" type="text" value={measurementValue} onChange={e => setMeasurementValue(e.target.value)}/>
                             <DatePicker className="rounded-md h-20 w-full text-center text-3xl font-bold shadow-lg my-3" type="text" selected={selectedDate} onChange={date => setSelectedDate(date)} />
                             <br></br>
-                            <input className="bg-white col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center hover:cursor-pointer hover:scale-105 duration-150 font-semibold" type="submit" value="Record Value" />
+                            <input className="bg-white col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center hover:cursor-pointer hover:scale-105 duration-150 font-semibold" type="submit" value="Record" />
                         </form>
-                    </div>
+                    </div> : null}
                 </div>
             </div> 
         </div>

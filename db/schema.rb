@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_11_182654) do
+ActiveRecord::Schema.define(version: 2023_09_12_205356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,11 +49,11 @@ ActiveRecord::Schema.define(version: 2023_09_11_182654) do
     t.string "watering_frequency"
     t.string "light_duration"
     t.string "light_intensity"
-    t.string "nutrients", default: [], array: true
     t.string "measurement_date", default: [], array: true
     t.string "measurement_value", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "tracking"
   end
 
   create_table "plant_ownerships", force: :cascade do |t|
