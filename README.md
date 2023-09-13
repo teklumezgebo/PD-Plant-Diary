@@ -1,4 +1,4 @@
-# Plant Diary (PD) Web App
+# Plant Diary (PD) Web App (WIP)
 
 Plant Diary (PD) is a web application that allows users to log their plants and their care requirements, as well as track their plants' growth. Users can add as many plants as they want and manage them using authentication and authorization with bcrypt.
 
