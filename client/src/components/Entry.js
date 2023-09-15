@@ -19,25 +19,21 @@ function Entry() {
     const [location, setLocation] = useState('')
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [measurementValue, setMeasurementValue] = useState('')
+    const [label, setLabel] = useState('')
     const [image, setImage] = useState('')
-    const [tracking, setTracking] = useState(false)
     const [form, setForm] = useState(false)
-
-   
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
 
-    // const dates = plant.care_requirements.measurement_date
-
-    // const data = plant.care_requirements.measurement_value
-
+    console.log(plant)
+  
     Chart.defaults.color = "#F2E9E4"
 
     const chartdata = {
-        // labels: plant.care_requirements.measurement_date.map(date => date.substr(0,10)),
+        labels: plant.care_requirements && plant.care_requirements.measurement_date ? plant.care_requirements.measurement_date.map(date => date.substr(0,10)) : [],
         datasets: [{
-            label: "amount",
-            // data: plant.care_requirements.measurement_value.map(value => parseInt(value)),
+            label: plant.care_requirements && plant.care_requirements.measurement_label ? plant.care_requirements.measurement_label : "Value",
+            data: plant.care_requirements && plant.care_requirements.measurement_value ? plant.care_requirements.measurement_value.map(value => parseInt(value)) : [],
             backgroundColor: '#22223B',
             borderColor: 'white'
         }]
@@ -50,9 +46,12 @@ function Entry() {
         light_intensity: intensity
     }
 
+    console.log(careRequirementsObj)
+
     const newDataObj = {
         measurement_date: selectedDate,
-        measurement_value: measurementValue
+        measurement_value: measurementValue,
+        label: label
     }
 
     function handleNewRequirement(e) {
@@ -65,15 +64,33 @@ function Entry() {
         .then(res => {
             if (res.ok) {
                 res.json().then(updatedPlant => {
-                    plant.care_requirements.watering_frequency = updatedPlant.care_requirements.watering_frequency
-                    plant.care_requirements.light_intensity = updatedPlant.care_requirements.light_intensity
-                    plant.care_requirements.light_duration = updatedPlant.care_requirements.light_duration
-                    plant.care_requirements.location = updatedPlant.care_requirements.location
+                    console.log(updatedPlant)
+                    plant.care_requirements = updatedPlant.care_requirements
                     setFrequency('')
                     setIntensity('')
                     setDuration('')
                     setLocation('')
                     setForm(false)
+                })
+            } else {
+                res.json().then(res => console.log(res))
+            }
+        })
+    }
+
+    function handleTracking() {
+        fetch(`/initiate_tracking/${id}}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                tracking: true
+            })
+        })
+        .then(res => {
+            if (res.ok) {
+                res.json().then(updatedPlant => {
+                    plant.care_requirements = updatedPlant.care_requirements
+                    setImage(false)
                 })
             } else {
                 res.json().then(res => console.log(res))
@@ -91,10 +108,10 @@ function Entry() {
         .then(res => {
             if (res.ok) {
                 res.json().then(updatedPlant => {
-                    plant.care_requirements.measurement_date = updatedPlant.care_requirements.measurement_date
-                    plant.care_requirements.measurement_value = updatedPlant.care_requirements.measurement_value
+                    plant.care_requirements = updatedPlant.care_requirements
                     setMeasurementValue('')
                     setSelectedDate('')
+                    setLabel('')
                 })
             } else {
                 res.json().then(res => console.log(res))
@@ -110,7 +127,7 @@ function Entry() {
                         <div className="bg-[#4A4E69] grid grid-col gap-2 rounded-md shadow-lg p-2 w-96">
                             <div className="text-[#F2E9E4] p-2 font-semibold text-center text-7xl">{plant.name}</div>
                             <div className=" text-[#F2E9E4] text-left font-medium">Species: {plant.species}</div>
-                            <div className="text-[#F2E9E4] text-left font-medium">Entered: {plant.plant_ownerships[0].plant_date}</div>
+                            <div className="text-[#F2E9E4] text-left font-medium">Entered: {plant.plant_ownerships ? plant.plant_ownerships[0].plant_date : <div>Loading....</div>}</div>
                         </div>
                         <div className="bg-[#4A4E69] shadow-lg grid grid-col-1 w-full h-full gap-4 rounded-md p-3 items-center">
                             <div className="bg-[#F2E9E4] w-full h-full rounded-md" >
@@ -153,14 +170,16 @@ function Entry() {
                         </div>
                     </div>
                 </div>
-                <div className={`bg-[#4A4E69] grid ${tracking ? 'grid-cols-2' : 'grid-cols-1 place-items-center'} gap-3 p-4 w-full rounded-xl shadow-md items-center `}>
-                  {tracking ? <div className="bg-[#5C706B] rounded-xl h-full text-center p-2"> 
+                <div className={`bg-[#4A4E69] grid ${plant.care_requirements && plant.care_requirements.tracking ? 'grid-cols-2' : 'grid-cols-1 place-items-center'} gap-3 p-4 w-full rounded-xl shadow-md items-center `}>
+                  {plant.care_requirements && plant.care_requirements.tracking ? <div className="bg-[#5C706B] rounded-xl h-full text-center p-2"> 
                         <Line className="text-[#F2E9E4]" data={chartdata} />
-                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={() => setTracking(!tracking)}>Add Tracking</div>}
-                    {tracking ? <div className="bg-[#F2E9E4] grid grid-cols-1 rounded-xl h-full text-center shadow-lg  p-4">
+                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={handleTracking}>Add Tracking</div>}
+                    {plant.care_requirements && plant.care_requirements.tracking ? <div className="bg-[#F2E9E4] grid grid-cols-1 rounded-xl h-full text-center shadow-lg  p-4">
                         <form className="bg-[#9A8C98] shawdow-lg rounded-2xl p-4 grid grid-cols-2 items-start gap-3" onSubmit={handleNewData}>
                             <input className="rounded-md h-20 text-center text-5xl font-bold shadow-lg my-3" type="text" value={measurementValue} onChange={e => setMeasurementValue(e.target.value)}/>
                             <DatePicker className="rounded-md h-20 w-full text-center text-3xl font-bold shadow-lg my-3" type="text" selected={selectedDate} onChange={date => setSelectedDate(date)} />
+                            <br></br>
+                            {plant.care_requirements.measurement_label ? null : <div className="col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center text-center font-semibold"><label className="col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center text-center font-semibold" htmlFor='label'>Measurment Label</label><input id="label" className="col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center text-center font-semibold" type="text" value={label} onChange={e => setLabel(e.target.value)}/></div>}
                             <br></br>
                             <input className="bg-white col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center hover:cursor-pointer hover:scale-105 duration-150 font-semibold" type="submit" value="Record" />
                         </form>
