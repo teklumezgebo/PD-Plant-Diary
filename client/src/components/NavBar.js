@@ -7,6 +7,7 @@ import { GiPlantSeed } from "react-icons/gi"
 import { CgLogOut } from "react-icons/cg"
 import { FaUser } from "react-icons/fa"
 import { RiPlantFill } from "react-icons/ri"
+import { TfiSearch } from "react-icons/tfi"
 
 function Navbar() {
     const { setUser } = useUserContext()
@@ -28,7 +29,7 @@ function Navbar() {
                     <h1 className={`text-[#F2E9E4] origin-left font-bold text-2xl flex-1 duration-0 ${!open && "hidden"} `}>PD</h1>
                 </div>
                 <ul className="pt-2">
-                    <Link to="/dashboard"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><MdSpaceDashboard/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Dashboard</span></li></Link>
+                    <Link to="/dashboard"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><TfiSearch /></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Dashboard</span></li></Link>
                     <Link to="/plants"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><RiPlantFill/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Plants</span></li></Link>
                     <Link to="/profile"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><FaUser/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Profile</span></li></Link>
                     <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#3A3A22] rounded-md mt-2" onClick={handleLogout}><span className="text-2xl block float-left"><CgLogOut/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Logout</span></li>

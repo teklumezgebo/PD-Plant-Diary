@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function PlantCard({ name, species, notes, id }) {
     return (
-            <div className="max-w-sm overflow-hidden rounded-xl bg-[#C9ADA7] shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+            <div className="max-w-md overflow-hidden rounded-xl bg-[#C9ADA7] shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                 <img src="https://i.imgur.com/5dmBrx6.jpg" alt="plant" className="h-auto w-full"/>
                 <div className="p-5">
                     <p className="text-medium mb-4 text-gray-700 font-bold">{name}, {species}</p>
