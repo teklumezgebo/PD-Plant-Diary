@@ -22,13 +22,10 @@ function Entry() {
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [measurementValue, setMeasurementValue] = useState('')
     const [label, setLabel] = useState('')
-    const [image, setImage] = useState('')
     const [form, setForm] = useState(false)
     const [deletionForm, setDeletionForm] = useState(false)
 
     const plant = user.plants.find(plant => plant.id === parseInt(id))
-
-    console.log(plant)
   
     Chart.defaults.color = "#F2E9E4"
 
@@ -93,7 +90,7 @@ function Entry() {
             if (res.ok) {
                 res.json().then(updatedPlant => {
                     plant.care_requirements = updatedPlant.care_requirements
-                    setImage(false)
+                    
                 })
             } else {
                 res.json().then(res => console.log(res))
@@ -193,7 +190,7 @@ function Entry() {
                     <div className="bg-[#C9ADA7] grid grid-cols-1 place-items-center h-full items-center rounded-xl shadow-lg p-4">
                         <div className="grid grid-cols-1 gap-2 place-items-center">
                             <div className="text-lg font-semibold">Upload a picture here!</div>
-                            <input className="bg-gray-200 w-60 p-2 text-center rounded-xl hover:cursor-pointer hover:scale-110 duration-150" type="file" onChange={e => setImage(e.target.files[0])}/>
+                            <input className="bg-gray-200 w-60 p-2 text-center rounded-xl hover:cursor-pointer hover:scale-110 duration-150" type="file" />
                             <button className="bg-black w-20 p-2 text-white rounded-xl hover:scale-105 duration-150">Upload</button>
                         </div>
                     </div>

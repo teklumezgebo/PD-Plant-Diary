@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useUserContext } from "./UserContext";
+import Login from "./components/Login"
+import SignUp from "./components/SignUp";
 import Navbar from "./components/NavBar";
 import LandingPage from "./components/LandingPage"
 import Profile from "./components/Profile";
-import Homepage from "./components/HomePage";
-import Dashboard from "./components/Dashboard";
+import GuideList from "./components/GuideList";
 import PlantPage from "./components/PlantPage";
 import PlantEntry from "./components/Entry";
+import Guide from "./components/Guide";
 
 function App() {
   const { user, setUser } = useUserContext()
@@ -23,18 +25,24 @@ function App() {
     })
   }, [setUser])
 
-  if (!user) return <LandingPage />
-
   return (
-    <div className="flex h-full">
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Homepage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/plants" element={<PlantPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route exact path="/entry/:id" element={<PlantEntry />} />
-        </Routes>
+    <div>
+        { !user ? 
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<SignUp />} />
+          </Routes> : 
+          <div className="flex h-full">
+            <Navbar />
+            <Routes>
+              <Route path="/plants" element={<PlantPage />} />
+              <Route path="/guides" element={<GuideList />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route exact path="/entry/:id" element={<PlantEntry />} />
+              <Route exact path="/guides/:id" element={<Guide />} />
+            </Routes>
+          </div> }
     </div>
   )
 }
