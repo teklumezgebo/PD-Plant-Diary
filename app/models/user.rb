@@ -1,8 +1,8 @@
 class User < ApplicationRecord
     has_secure_password
     
-    has_many :plant_ownerships
-    has_many :plants, through: :plant_ownerships
+    has_many :plant_ownerships, dependent: :destroy
+    has_many :plants, through: :plant_ownerships, dependent: :destroy
 
     validates :username, presence: true
     validates :username, uniqueness: true

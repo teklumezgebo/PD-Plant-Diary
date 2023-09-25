@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../UserContext";
 import { BsArrowLeftShort } from "react-icons/bs"
-import { MdSpaceDashboard } from "react-icons/md"
 import { GiPlantSeed } from "react-icons/gi"
 import { CgLogOut } from "react-icons/cg"
 import { FaUser } from "react-icons/fa"
@@ -11,13 +10,17 @@ import { TfiSearch } from "react-icons/tfi"
 
 function Navbar() {
     const { setUser } = useUserContext()
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
 
     function handleLogout() {
         fetch('logout' , {
             method: 'DELETE'
         })
-        .then(() => setUser(null))
+        .then(() => {
+            setUser(null)
+            navigate('/')
+        })
     }
     
     return (
@@ -32,7 +35,7 @@ function Navbar() {
                     <Link to="/guides"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><TfiSearch /></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Plant Guides</span></li></Link>
                     <Link to="/plants"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><RiPlantFill/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Plants</span></li></Link>
                     <Link to="/profile"><li className="text-[#F2E9E4] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#9A8C98] rounded-md mt-2"><span className="text-2xl block float-left"><FaUser/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Profile</span></li></Link>
-                    <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#3A3A22] rounded-md mt-2" onClick={handleLogout}><span className="text-2xl block float-left"><CgLogOut/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Logout</span></li>
+                    <li className="text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-[#C9ADA7] rounded-md mt-2" onClick={handleLogout}><span className="text-2xl block float-left"><CgLogOut/></span><span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>Logout</span></li>
                 </ul>
             </div>
         </div>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :care_requirements
   resources :plant_ownerships
   resources :plants
-  resources :users, only: [:show, :create]
+  resources :users, only: [:show, :create, :destroy]
   get '/auth', to: "users#show"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
