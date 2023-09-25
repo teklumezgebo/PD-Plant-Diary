@@ -8,7 +8,7 @@ function GuideList() {
     
     function handleSearch(e) {
         e.preventDefault()
-        fetch(`https://perenual.com/api/species-care-guide-list?key=sk-96T76508ba2106a792196&q=${search}`)
+        fetch(`https://perenual.com/api/species-care-guide-list?key=&q=${search}`)
         .then(res => {
             if (res.ok) {
                 res.json().then(plants => {
