@@ -1,12 +1,14 @@
 # Plant Diary (PD) Web App
 
-Plant Diary (PD) is a web application that allows users to log their plants and their care requirements, as well as track their plants' growth. Users can add as many plants as they want and manage them using authentication and authorization with bcrypt.
+PD is a web app that is meant to help people keep track of their plants and plant needs all in one space. Users are able to track their plants growth with dynamic charts and upload images to keep an updated picutre of the plant at all times. Using Perenul's API users are able to look up guides for taking care of their plants as well!
 
 ## Features
 
 - Log plants and their care requirements
 - Track plant growth with visualizations using Chart.js
 - Add and manage multiple plants
+- Image Upload
+- Plant Guides
 - Authentication and authorization with bcrypt
 - Responsive design with Tailwind CSS
 
