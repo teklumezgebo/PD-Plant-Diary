@@ -1,6 +1,6 @@
 # Plant Diary (PD) Web App
 
-PD is a web app that is meant to help people keep track of their plants and plant needs all in one space. Users are able to track their plants growth with dynamic charts and upload images to keep an updated picutre of the plant at all times. Using Perenul's API users are able to look up guides for taking care of their plants as well!
+PD is a web app that is meant to help people keep track of their plants and plant needs all in one space. Users are able to track their plants growth with dynamic charts and upload images to keep an updated picutre of the plant at all times. Using [Perenul's](https://perenual.com/docs/api) API users are able to look up guides for taking care of their plants as well!
 
 ## Features
 
