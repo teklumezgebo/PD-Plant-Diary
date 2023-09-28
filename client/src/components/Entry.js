@@ -4,9 +4,6 @@ import { useUserContext } from "../UserContext";
 import { Line } from "react-chartjs-2";
 import { Chart as Chart } from "chart.js/auto"
 import DatePicker from "react-datepicker"
-import { MdWaterDrop, MdLocationPin } from "react-icons/md"
-import { GiFlashlight } from "react-icons/gi"
-import { HiClock } from "react-icons/hi"
 import { BsFillTrashFill } from "react-icons/bs"
 import "react-datepicker/dist/react-datepicker.css"
 import { Link } from "react-router-dom";
@@ -34,15 +31,19 @@ function Entry() {
 
     Chart.defaults.color = "#F2E9E4"
 
+    console.log(plant)
+
     const chartdata = {
         labels: plant.care_requirements && plant.care_requirements.measurement_date ? plant.care_requirements.measurement_date.map(date => date.substr(0,10)) : [],
         datasets: [{
             label: plant.care_requirements && plant.care_requirements.measurement_label ? plant.care_requirements.measurement_label : "Value",
-            data: plant.care_requirements && plant.care_requirements.measurement_value ? plant.care_requirements.measurement_value.map(value => parseInt(value)) : [],
+            data: plant.care_requirements && plant.care_requirements.measurement_value ? plant.care_requirements.measurement_value : [],
             backgroundColor: '#22223B',
             borderColor: 'white'
         }]
     }
+
+    console.log(plant)
 
     const careRequirementsObj = {
         location: location,
@@ -54,7 +55,7 @@ function Entry() {
 
     const newDataObj = {
         measurement_date: selectedDate,
-        measurement_value: measurementValue,
+        measurement_value: parseInt(measurementValue),
         label: label
     }
 
@@ -161,11 +162,11 @@ function Entry() {
                 <div className="bg-[#4A4E69] grid grid-cols-2 gap-4 w-full rounded-lg h-full items-start p-4 shadow-md">
                     <div className="bg-[#9A8C98] grid grid-col-2 gap-3 h-full items-start rounded-xl shadow-lg p-4">
                         <div className="bg-[#4A4E69] grid grid-col gap-2 rounded-md shadow-lg p-2 w-96">
-                            <div className="text-[#F2E9E4] p-2 font-semibold text-center text-7xl">{plant.name}</div>
+                            <div className="text-[#F2E9E4] p-2 font-semibold text-center text-7xl w-10">{plant.name}</div>
                             <div className=" text-[#F2E9E4] p-2 text-left font-medium">Species: {plant.species}</div>
                             <div className="text-[#F2E9E4] p-2 text-left font-medium">Entered: {plant.plant_ownerships ? plant.plant_ownerships[0].plant_date : <div>Loading....</div>}</div>
                             <div className="grid grid-col-2 p-2 gap-2">                     
-                                <div className="bg-[#9A8C98] shadow-md text-center rounded-xl w-full p-2 hover:cursor-pointer hover:scale-105 duration-150 font-semibold " onClick={() => setForm(true)}>Edit Trackers</div>
+                                <div className="bg-[#9A8C98] shadow-md text-center rounded-xl w-full p-2 hover:cursor-pointer hover:scale-105 duration-150 font-semibold " onClick={() => setForm(true)}>Edit Demographics</div>
                                 <div className="bg-[#C9ADA7] w-full h-10 rounded-xl grid grid-col place-items-center hover:cursor-pointer hover:scale-105 duration-150 " onClick={() => setDeletionForm(true)}><BsFillTrashFill/></div>
                             </div>
                         </div>
@@ -194,13 +195,13 @@ function Entry() {
                                                 <div className="grid grid-col gap-2 p-4">
                                                     <div className="bg-red-200 w-10 h-10 font-bold p-2 text-center rounded-lg place-self-end -mt-2 hover:cursor-pointer hover:scale-105 duration-150" onClick={() => setForm(false)}>X</div>
                                                     <div className="grid grid-col gap-2 items-center" >
-                                                    <div className="text-[#F2E9E4] text-sm"><MdWaterDrop /></div>
+                                                    <div className="text-[#F2E9E4] text-sm font-semibold">Watering Frequnecy:</div>
                                                     <input className="rounded-md shadow-md p-1" type="text" onChange={e => setFrequency(e.target.value)} value={frequency}/>
-                                                    <div className="text-[#F2E9E4] text-sm"><GiFlashlight /></div>
+                                                    <div className="text-[#F2E9E4] text-sm font-semibold">Light Source:</div>
                                                     <input className="rounded-md shadow-md p-1" type="text" onChange={e => setIntensity(e.target.value)} value={intensity}/>
-                                                    <div className="text-[#F2E9E4] text-sm"><HiClock /></div>
+                                                    <div className="text-[#F2E9E4] text-sm font-semibold">Duration In Light Source:</div>
                                                     <input className="rounded-md shadow-md p-1" type="text" onChange={e => setDuration(e.target.value)} value={duration}/>
-                                                    <div className="text-[#F2E9E4] text-sm"><MdLocationPin /></div>
+                                                    <div className="text-[#F2E9E4] text-sm font-semibold">Location:</div>
                                                     <input className="rounded-md shadow-md p-1" type="text" onChange={e => setLocation(e.target.value)} value={location}/>
                                                     <div className="text-[#F2E9E4] text-sm font-semibold">Notes:</div>
                                                     <textarea className="rounded-md shadow-md h-40 align-text-top p-2" type="text" onChange={e => setNotes(e.target.value)} value={notes}/>

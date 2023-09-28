@@ -10,7 +10,7 @@ class CareRequirementsController < ApplicationController
           care_requirement.measurement_label = params[:label]
       
           if params[:measurement_date].nil? || params[:measurement_date].empty? || params[:measurement_value].nil? || params[:measurement_value].empty?
-            render json: { error: 'A value and date are required' }, status: :unprocessable_entity
+            render json: { error: 'A number and date are required' }, status: :unprocessable_entity
           else
             care_requirement.measurement_date.push(params[:measurement_date])
             care_requirement.measurement_value.push(params[:measurement_value])
@@ -24,8 +24,8 @@ class CareRequirementsController < ApplicationController
             plant.care_requirements[0].measurement_label = params[:label]
           end
       
-          if params[:measurement_date].nil? || params[:measurement_date].empty? || params[:measurement_value].nil? || params[:measurement_value].empty?
-            render json: { error: 'A value and date are required' }, status: :unprocessable_entity
+          if params[:measurement_date].nil? || params[:measurement_date].empty? || params[:measurement_value].nil? || params[:measurement_value].empty? || !params[:measurement_value].integer?
+            render json: { error: 'A number and date are required' }, status: :unprocessable_entity
           else
             plant.care_requirements[0].measurement_date.push(params[:measurement_date])
             plant.care_requirements[0].measurement_value.push(params[:measurement_value])

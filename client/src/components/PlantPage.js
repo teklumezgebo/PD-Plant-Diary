@@ -10,7 +10,7 @@ function PlantPage() {
     const [errors, setErrors] = useState(false)
 
     const { user } = useUserContext()
-
+    console.log(user)
     const newPlantObj = {
         name: name,
         species: species,
