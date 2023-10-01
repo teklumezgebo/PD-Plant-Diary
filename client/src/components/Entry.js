@@ -31,8 +31,6 @@ function Entry() {
 
     Chart.defaults.color = "#F2E9E4"
 
-    console.log(plant)
-
     const chartdata = {
         labels: plant.care_requirements && plant.care_requirements.measurement_date ? plant.care_requirements.measurement_date.map(date => date.substr(0,10)) : [],
         datasets: [{
@@ -42,8 +40,6 @@ function Entry() {
             borderColor: 'white'
         }]
     }
-
-    console.log(plant)
 
     const careRequirementsObj = {
         location: location,
@@ -245,7 +241,7 @@ function Entry() {
                 <div className={`bg-[#4A4E69] grid ${(plant.care_requirements && plant.care_requirements.tracking) || tracking === true ? 'grid-cols-2' : 'grid-cols-1 place-items-center'} gap-3 p-4 w-full rounded-xl shadow-md items-center `}>
                   {(plant.care_requirements && plant.care_requirements.tracking) || tracking === true ? <div className="bg-[#5C706B] rounded-xl h-96 text-center p-2"> 
                         <Line className="text-[#F2E9E4]" data={chartdata} />
-                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={handleTracking}>Add Tracking</div>}
+                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={handleTracking}>Add Plant Growth Tracking</div>}
                     {(plant.care_requirements && plant.care_requirements.tracking) || tracking === true ? <div className="bg-[#F2E9E4] grid grid-cols-1 rounded-xl h-96 text-center shadow-lg  p-4">
                         <form className="bg-[#9A8C98] shawdow-lg rounded-2xl p-4 grid grid-cols-2 items-start gap-3" onSubmit={handleNewData}>
                             <input className="rounded-md h-20 text-center text-5xl font-bold shadow-lg my-3" type="text" placeholder={plant.care_requirements && plant.care_requirements.measurement_label ? plant.care_requirements.measurement_label : 'Value'} value={measurementValue} onChange={e => setMeasurementValue(e.target.value)}/>
