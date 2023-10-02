@@ -27,6 +27,8 @@ function Entry() {
     const [label, setLabel] = useState('')
     const [form, setForm] = useState(false)
     const [deletionForm, setDeletionForm] = useState(false)
+    const [trackingForm, setTrackingForm] = useState(false)
+    const [trackingType, setTrackingType] = useState('')
     const [error, setErrors] = useState(false)
 
     Chart.defaults.color = "#F2E9E4"
@@ -51,8 +53,7 @@ function Entry() {
 
     const newDataObj = {
         measurement_date: selectedDate,
-        measurement_value: parseInt(measurementValue),
-        label: label
+        measurement_value: parseInt(measurementValue)
     }
 
     function handleNewRequirement(e) {
@@ -65,7 +66,6 @@ function Entry() {
         .then(res => {
             if (res.ok) {
                 res.json().then(updatedPlant => {
-                    console.log(updatedPlant)
                     plant.care_requirements = updatedPlant.care_requirement
                     plant.notes = updatedPlant.plant.notes
                     setFrequency('')
@@ -81,18 +81,22 @@ function Entry() {
         })
     }
 
-    function handleTracking() {
+    function handleTracking(e) {
+        e.preventDefault()
         fetch(`/initiate_tracking/${id}}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                tracking: true
+                tracking: true,
+                label: label
             })
         })
         .then(res => {
             if (res.ok) {
-                res.json().then(() => {
+                res.json().then((updatedPlant) => {
+                    plant.care_requirements = updatedPlant.care_requirement
                     setTracking(true)
+                    setTrackingForm(false)
                 })
             } else {
                 res.json().then(res => console.log(res))
@@ -151,6 +155,38 @@ function Entry() {
             setDeletionForm(false)
         })
     }
+
+    function handleCareRequirementsForm() {
+        setForm(true)
+        setFrequency(plant.care_requirements.watering_frequency ? plant.care_requirements.watering_frequency : '')
+        setIntensity(plant.care_requirements.light_intensity ? plant.care_requirements.light_intensity : '')
+        setDuration(plant.care_requirements.light_duration ? plant.care_requirements.light_duration : '')
+        setLocation(plant.care_requirements.location ? plant.care_requirements.location : '')
+        setNotes(plant.notes ? plant.notes : '')
+    }
+
+    function handleTrackingType() {
+        switch(trackingType) {
+            case "Weight":
+                return <select onChange={(e) => setLabel(e.target.value)} className="col-span-2 p-2 rounded-xl">
+                <option></option>
+                <option value="ounces">Ounces</option>
+                <option value="grams">Grams</option>
+                <option value="pounds">Pounds</option>
+                <option value="kilograms">Kilograms</option>
+            </select>
+            case "Length": 
+                return <select onChange={(e) => setLabel(e.target.value)} className="col-span-2 p-2 rounded-xl">
+                <option></option>
+                <option value="inches">Inches</option>
+                <option value="feet">Feet</option>
+                <option value="centimeters">Centimeters</option>
+                <option value="meters">Meters</option>
+            </select>
+            default :
+            return null
+        }
+    }
     
     return(
         <div className={`grid grid-cols-1 w-screen ${(plant.care_requirements && plant.care_requirements.tracking) || tracking ? 'h-:full' : 'h-screen' } p-5`}>
@@ -162,7 +198,7 @@ function Entry() {
                             <div className=" text-[#F2E9E4] p-2 text-left font-medium">Species: {plant.species}</div>
                             <div className="text-[#F2E9E4] p-2 text-left font-medium">Entered: {plant.plant_ownerships ? plant.plant_ownerships[0].plant_date : <div>Loading....</div>}</div>
                             <div className="grid grid-col-2 p-2 gap-2">                     
-                                <div className="bg-[#9A8C98] shadow-md text-center rounded-xl w-full p-2 hover:cursor-pointer hover:scale-105 duration-150 font-semibold " onClick={() => setForm(true)}>Edit Demographics</div>
+                                <div className="bg-[#9A8C98] shadow-md text-center rounded-xl w-full p-2 hover:cursor-pointer hover:scale-105 duration-150 font-semibold " onClick={handleCareRequirementsForm}>Edit Care Requirements</div>
                                 <div className="bg-[#C9ADA7] w-full h-10 rounded-xl grid grid-col place-items-center hover:cursor-pointer hover:scale-105 duration-150 " onClick={() => setDeletionForm(true)}><BsFillTrashFill/></div>
                             </div>
                         </div>
@@ -175,7 +211,7 @@ function Entry() {
                                 </div>
                             </div>
                                 <div className="bg-[#F2E9E4] grid grid-cols-4 gap-3 p-2 shadow-lg rounded-md">
-                                    <div className="text-left text-[#22223B] font-bold">Watering Frequnecy:</div>
+                                    <div className="text-left text-[#22223B] font-bold">Watering Frequency:</div>
                                     <div className="text-center text-[#4A4E69] font-semibold">{plant.care_requirements ? (plant.care_requirements.watering_frequency ? plant.care_requirements.watering_frequency : "") : ""}</div>
                                     <div className="text-left text-[#22223B] font-bold">Light Source:</div>
                                     <div className="text-center text-[#4A4E69] font-semibold">{plant.care_requirements ? (plant.care_requirements.light_intensity ? plant.care_requirements.light_intensity : "" ): ""}</div> 
@@ -191,7 +227,7 @@ function Entry() {
                                                 <div className="grid grid-col gap-2 p-4">
                                                     <div className="bg-red-200 w-10 h-10 font-bold p-2 text-center rounded-lg place-self-end -mt-2 hover:cursor-pointer hover:scale-105 duration-150" onClick={() => setForm(false)}>X</div>
                                                     <div className="grid grid-col gap-2 items-center" >
-                                                    <div className="text-[#F2E9E4] text-sm font-semibold">Watering Frequnecy:</div>
+                                                    <div className="text-[#F2E9E4] text-sm font-semibold">Watering Frequency:</div>
                                                     <input className="rounded-md shadow-md p-1" type="text" onChange={e => setFrequency(e.target.value)} value={frequency}/>
                                                     <div className="text-[#F2E9E4] text-sm font-semibold">Light Source:</div>
                                                     <input className="rounded-md shadow-md p-1" type="text" onChange={e => setIntensity(e.target.value)} value={intensity}/>
@@ -241,13 +277,28 @@ function Entry() {
                 <div className={`bg-[#4A4E69] grid ${(plant.care_requirements && plant.care_requirements.tracking) || tracking === true ? 'grid-cols-2' : 'grid-cols-1 place-items-center'} gap-3 p-4 w-full rounded-xl shadow-md items-center `}>
                   {(plant.care_requirements && plant.care_requirements.tracking) || tracking === true ? <div className="bg-[#5C706B] rounded-xl h-96 text-center p-2"> 
                         <Line className="text-[#F2E9E4]" data={chartdata} />
-                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={handleTracking}>Add Plant Growth Tracking</div>}
+                    </div> : <div className="bg-[#F2E9E4] w-1/5 rounded-xl h-20 grid grid-cols-1 text-center font-semibold place-self-center hover:cursor-pointer hover:scale-105 duration-150 content-center text-2xl" onClick={() => setTrackingForm(true)}>Add Plant Growth Tracking</div>}
+                    {trackingForm ? 
+                    <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
+                        <div className="bg-[#F2E9E4] grid grid-col-1 w-72 place-items-center h-2/5 rounded-lg gap-14">
+                            <div className="bg-red-200 w-10 h-10 font-bold p-2 text-center self-start rounded-lg place-self-end relative right-3 top-3 hover:cursor-pointer hover:scale-105 duration-150" onClick={() => setTrackingForm(false)}>X</div>
+                            <form className="grid grid-col-2 gap-5 place-items-center self-start -mt-24" onSubmit={handleTracking}>
+                                <div className="col-span-2 text-center font-semibold ">What are you measuring?</div>
+                                <select className="col-span-2 p-2 rounded-xl" onChange={(e) => setTrackingType(e.target.value)}>
+                                    <option></option>
+                                    <option value="Length">Length</option>
+                                    <option  value="Weight">Weight</option>
+                                </select>
+                                {handleTrackingType()}
+                                {trackingType === ''  ? null : <input type="submit" className="bg-[#22223B] text-[#F2E9E4] p-3 hover:cursor-pointer rounded-xl hover:scale-105 duration-150 col-span-2"/>}
+                            </form>
+                        </div>
+                    </div> 
+                    : null}
                     {(plant.care_requirements && plant.care_requirements.tracking) || tracking === true ? <div className="bg-[#F2E9E4] grid grid-cols-1 rounded-xl h-96 text-center shadow-lg  p-4">
                         <form className="bg-[#9A8C98] shawdow-lg rounded-2xl p-4 grid grid-cols-2 items-start gap-3" onSubmit={handleNewData}>
-                            <input className="rounded-md h-20 text-center text-5xl font-bold shadow-lg my-3" type="text" placeholder={plant.care_requirements && plant.care_requirements.measurement_label ? plant.care_requirements.measurement_label : 'Value'} value={measurementValue} onChange={e => setMeasurementValue(e.target.value)}/>
+                            <input className="rounded-md h-20 text-center text-5xl font-bold shadow-lg my-3" type="text" placeholder={plant.care_requirements && plant.care_requirements.measurement_label ? plant.care_requirements.measurement_label : "Loading..."} value={measurementValue} onChange={e => setMeasurementValue(e.target.value)}/>
                             <DatePicker className="rounded-md h-20 w-full text-center text-3xl font-bold shadow-lg my-3" type="text" selected={selectedDate} onChange={date => setSelectedDate(date)} />
-                            <br></br>
-                            {plant.care_requirements && plant.care_requirements.measurement_label ? null : <div className="col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center text-center font-semibold"><label className="col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center text-center font-semibold" htmlFor='label'>Measurment Label</label><input id="label" className="col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center text-center font-semibold" type="text" value={label} onChange={e => setLabel(e.target.value)}/></div>}
                             <br></br>
                             <input className="bg-white col-span-2 w-80 rounded-xl shadow-lg h-11 place-self-center hover:cursor-pointer hover:scale-105 duration-150 font-semibold" type="submit" value="Record" />
                         </form>

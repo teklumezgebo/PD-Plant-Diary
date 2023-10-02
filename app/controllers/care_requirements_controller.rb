@@ -7,7 +7,7 @@ class CareRequirementsController < ApplicationController
         if !plant.care_requirements[0]
 
           care_requirement = CareRequirement.create(plant_id: plant.id)
-          care_requirement.measurement_label = params[:label]
+          
       
           if params[:measurement_date].nil? || params[:measurement_date].empty? || params[:measurement_value].nil? || params[:measurement_value].empty?
             render json: { error: 'A number and date are required' }, status: :unprocessable_entity
@@ -19,12 +19,8 @@ class CareRequirementsController < ApplicationController
           end
 
         else
-
-          if !plant.care_requirements[0].measurement_label
-            plant.care_requirements[0].measurement_label = params[:label]
-          end
       
-          if params[:measurement_date].nil? || params[:measurement_date].empty? || params[:measurement_value].nil? || params[:measurement_value].empty? || !params[:measurement_value].integer?
+          if params[:measurement_date].nil? || params[:measurement_date].empty? || params[:measurement_value].nil? || params[:measurement_value].nil? || !params[:measurement_value].integer?
             render json: { error: 'A number and date are required' }, status: :unprocessable_entity
           else
             plant.care_requirements[0].measurement_date.push(params[:measurement_date])
@@ -70,9 +66,10 @@ class CareRequirementsController < ApplicationController
         if !plant.care_requirements[0]
             care_requirement = CareRequirement.create(
                 plant_id: plant.id,
-                tracking: true
+                tracking: true,
+                measurement_label: params[:label]
             )
-            render json: plant, status: :created
+            render json: {plant: plant, care_requirement: care_requirement}, status: :created
         else
             plant.care_requirements[0].tracking = true
             plant.care_requirements[0].save

@@ -1,29 +1,26 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 user = User.create!(username: "example_user", password: "example_password")
 
-# Create 15 plants with care requirements and plant ownerships
+locations = ['Window sill', 'Porch', 'Bedroom', 'Living room', 'Kitchen']
+watering_frequencies = ['Daily', 'Twice daily', 'Three times a day', 'N/A']
+light_durations = ['30 minutes', '45 minutes', '1 hour', '2 hours', '3 hours']
+light_source = ['Sunlight', 'Lamp', 'None']
+measurement_labels = ['m', 'cm', 'in', 'ft', 'lb', 'g', 'kg']
+
 15.times do |i|
   plant = Plant.create(
     name: "Plant #{i + 1}",
     species: "Species #{i + 1}",
-    notes: "Notes for plant #{i + 1}"
+    notes: "Plant #{i + 1} is a very gorgeous and beautiful plant!"
   )
 
   CareRequirement.create(
     plant_id: plant.id,
-    location: "Location #{i + 1}",
-    watering_frequency: "Watering frequency #{i + 1}",
-    light_duration: "Light duration #{i + 1}",
-    light_intensity: "Light intensity #{i + 1}",
+    location: locations.sample(1)[0],
+    watering_frequency: watering_frequencies.sample(1)[0],
+    light_duration: light_durations.sample(1)[0],
+    light_intensity: light_source.sample(1)[0],
     tracking: true,
-    measurement_label: "Label #{i + 1}"
+    measurement_label: measurement_labels.sample(1)[0]
   )
 
   plant.care_requirements[0].measurement_date.push('2023-09-28T00:11:54.908Z', '2023-09-29T00:11:54.908Z', '2023-09-30T00:11:54.908Z', '2023-10-01T00:11:54.908Z', '2023-10-02T00:11:54.908Z', '2023-10-03T00:11:54.908Z', '2023-10-04T00:11:54.908Z', '2023-10-05T00:11:54.908Z', '2023-10-06T00:11:54.908Z', '2023-10-07T00:11:54.908Z', '2023-10-08T00:11:54.908Z', '2023-10-09T00:11:54.908Z', '2023-10-10T00:11:54.908Z', '2023-10-11T00:11:54.908Z', '2023-10-12T00:11:54.908Z')
