@@ -72,8 +72,9 @@ class CareRequirementsController < ApplicationController
             render json: {plant: plant, care_requirement: care_requirement}, status: :created
         else
             plant.care_requirements[0].tracking = true
+            plant.care_requirements[0].measurement_label = params[:label]
             plant.care_requirements[0].save
-            render json: plant, status: :ok
+            render json: {plant: plant, care_requirement: plant.care_requirements[0]}, status: :ok
         end
     end
 

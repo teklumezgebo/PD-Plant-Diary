@@ -158,12 +158,14 @@ function Entry() {
 
     function handleCareRequirementsForm() {
         setForm(true)
-        setFrequency(plant.care_requirements.watering_frequency ? plant.care_requirements.watering_frequency : '')
-        setIntensity(plant.care_requirements.light_intensity ? plant.care_requirements.light_intensity : '')
-        setDuration(plant.care_requirements.light_duration ? plant.care_requirements.light_duration : '')
-        setLocation(plant.care_requirements.location ? plant.care_requirements.location : '')
-        setNotes(plant.notes ? plant.notes : '')
+        setFrequency(plant.care_requirements && plant.care_requirements.watering_frequency ? plant.care_requirements.watering_frequency : '')
+        setIntensity(plant.care_requirements && plant.care_requirements.light_intensity ? plant.care_requirements.light_intensity : '')
+        setDuration(plant.care_requirements && plant.care_requirements.light_duration ? plant.care_requirements.light_duration : '')
+        setLocation(plant.care_requirements && plant.care_requirements.location ? plant.care_requirements.location : '')
+        setNotes(plant.care_requirements && plant.notes ? plant.notes : '')
     }
+
+    console.log(plant.care_requirements)
 
     function handleTrackingType() {
         switch(trackingType) {

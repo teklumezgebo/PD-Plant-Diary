@@ -11,7 +11,7 @@ function GuideList() {
     function handleSearch(e) {
         e.preventDefault()
         setLoading(true)
-        fetch(`https://perenual.com/api/species-care-guide-list?key=YOUR-API-KEY-HERE&q=${search}`)
+        fetch(`https://perenual.com/api/species-care-guide-list?key=sk-yX9k651225dc7c6092196&q=${search}`)
         .then(res => {
             if (res.ok) {
                 res.json().then(plants => {
